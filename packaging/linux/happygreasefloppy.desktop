@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=HappyGreaseFloppy
+Comment=Read, write and check floppy disks with a Greaseweazle
+Exec=happygreasefloppy
+Icon=happygreasefloppy
+StartupWMClass=happygreasefloppy
+Terminal=false
+Categories=Utility;System;

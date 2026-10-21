@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+<title>HappyGreaseFloppy</title>
+<circle cx="512" cy="512" r="488" fill="#14161c"/>
+<circle cx="512" cy="512" r="488" fill="none" stroke="#3a4150" stroke-width="10"/>
+<circle cx="512" cy="512" r="409.3" fill="none" stroke="#43c478" stroke-width="71.7"/>
+<circle cx="512" cy="512" r="324.0" fill="none" stroke="#38bc9f" stroke-width="71.7"/>
+<circle cx="512" cy="512" r="238.7" fill="none" stroke="#2eb4c6" stroke-width="71.7"/>
+<path d="M157.5 307.3 A409.3333333333333 409.3333333333333 0 0 1 866.5 307.3" fill="none" stroke="#ffffff" stroke-opacity="0.92" stroke-width="82.4" stroke-linecap="round"/>
+<circle cx="512" cy="512" r="168" fill="#2a2f3a"/>
+<circle cx="512" cy="512" r="168" fill="none" stroke="#6b7385" stroke-width="12"/>
+<circle cx="512" cy="512" r="62" fill="#14161c"/>
+<circle cx="512" cy="394" r="30" fill="#4ea8de"/>
+</svg>

@@ -1,0 +1,22 @@
+[package]
+name = "hgf-gui"
+description = "Graphical front-end for the Greaseweazle host tools"
+build = "build.rs"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish = false
+
+[[bin]]
+name = "happygreasefloppy"
+path = "src/main.rs"
+
+[dependencies]
+hgf-core = { path = "../hgf-core" }
+eframe = { version = "0.36.2", features = ["persistence"] }
+egui-phosphor = "0.14"
+rfd = "0.15"
+serde = { version = "1", features = ["derive"] }
+
+[target.'cfg(windows)'.build-dependencies]
+winresource = "0.1"
