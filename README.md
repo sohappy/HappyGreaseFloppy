@@ -26,20 +26,21 @@ errors in plain language, and never runs a destructive operation without asking 
 
 ## Highlights
 
-* **See the disk**: both sides drawn as they turn, every track coloured as it is read or written
-  (good, recovered after retries, bad), per-sector details on hover, progress with ETA.
+* **See the disk**: both sides drawn as rings of tracks, each track coloured as it is read or
+  written (good, recovered after retries, bad), per-sector details on hover, progress with ETA.
 * **Understand failures**: "No Index", "Track 0 not found", "Failed to verify", write protection,
-  USB overflows… each comes with what to check, and a button to the right tool.
+  USB overflows… each comes with what to check and, when it helps, a button to the right tool.
 * **Recover worn disks**: Recovery profile, then *Re-read the failed tracks* only.
 * **Copy disks** with one drive (swap when asked) or two, as sectors or as raw flux (keeps copy
   protections).
 * **Format** blank disks for Amiga, PC, Atari ST, MSX, Commodore 1541/1571/1581, BBC Micro and
   Apple II.
-* **Check a drive** in one go: motor speed, USB link, a reference read, head offsets, optional
-  write test, with a verdict.
+* **Check a drive** in one go: motor speed, USB link, a reference read (with a head-offset test
+  if it fails), optional write test, and a verdict.
 * **Archive a box of disks**: automatic numbering (`disk_001.adf`, `disk_002.adf`…), saved
   settings per machine, a log file of every command.
-* Dark, light or system theme; adjustable text size; the exact `gw` command shown before it runs.
+* Dark, light or system theme; adjustable text size; the exact `gw` command shown before it runs
+  (Read, Write, Convert, Erase).
 
 ## Screenshots
 
@@ -74,8 +75,14 @@ image):
 
 ## Installation
 
-Download the archive for your system from the **Releases** page of this repository, or build it
-yourself (see [Building](#building)).
+No release is published: get the program in one of these two ways.
+
+* **Build it** on your computer (a few minutes, see [Building](#building)).
+* **Let GitHub build it**: in this repository, *Actions* → *Release* → **Run workflow**. When the
+  run is finished (about 15 minutes), its page offers the three archives below under
+  *Artifacts* (you must be signed in to GitHub to download them). Nothing is published.
+
+The archives contain:
 
 | System | Archive | How to start |
 |---|---|---|
@@ -93,7 +100,8 @@ again; the `HGF_GW` environment variable forces a path.
 
 1. **Connect** the Greaseweazle by USB and the drive with its ribbon cable and power.
 2. **Choose the drive** in the top bar:
-   * PC drive on a twisted cable: **Drive A** (connector after the twist) or **B**;
+   * PC drive on a twisted cable: **Drive A** on the end connector (after the twist), **Drive B**
+     on the middle one;
    * PC drive on a straight cable: **Drive B**;
    * Amiga, Atari or other vintage drive (straight cable): **Unit 0** or **Unit 1**.
 3. **Check the setup** with *Drive health* and a disk you know is good.
@@ -102,7 +110,8 @@ again; the `HGF_GW` environment variable forces a path.
 5. **Write a disk**: choose the image, check the format (detected from the image), then *Write
    image to disk*. Every track is verified.
 
-Without hardware, `HGF_GW=tools/fake-gw.py` runs the application against a simulator.
+Without hardware, start it with `HGF_GW=tools/fake-gw.py` (Linux, macOS; needs Python 3) to try
+it against a simulator.
 
 ## Pages
 
@@ -117,13 +126,14 @@ Without hardware, `HGF_GW=tools/fake-gw.py` runs the application against a simul
 | Drive health | `info` `rpm` `bandwidth` `read` `write` | guided check with a verdict and a copyable report |
 | Drive RPM · Head alignment | `rpm` · `align` | live readouts and charts |
 | Seek head · Clean drive | `seek` · `clean` | extreme-cylinder confirmation, cleaning progress |
-| Device info · Delays · Pins · USB bandwidth | `info` `delays` `pin` `bandwidth` | device details and settings |
-| Reset · Firmware update | `reset` `update` | local file, GitHub tag, bootloader |
+| Device info · Drive delays · Interface pins · USB bandwidth | `info` `delays` `pin` `bandwidth` | device details and settings |
+| Reset device · Firmware update | `reset` `update` | local file, GitHub tag, bootloader |
 | Image inspector | — | size, SHA-256, guessed format, AmigaDOS explorer |
 
-Everywhere: saved settings (templates) for Read and Write, the `gw` command line with a copy
-button, a *Stop* button (or `Esc`), a console with a *problems only* filter, drag and drop of
-image files, an optional log file, and a taskbar/Dock notification when a long operation ends.
+Also: saved settings (templates) on Read and Write, the `gw` command line with a copy button
+under the action buttons, a *Stop* button (or `Esc`) for any running operation, a console with a
+*problems only* filter, drag and drop of image files, an optional log file, and a taskbar/Dock
+notification when a long operation ends in the background.
 
 ## Troubleshooting
 
@@ -143,12 +153,18 @@ The [Greaseweazle wiki](https://github.com/keirf/greaseweazle/wiki) covers the h
 
 ## Building
 
-Rust 1.95 or later and a C toolchain are needed:
+Install [Rust](https://rustup.rs) 1.95 or later and a C toolchain (macOS:
+`xcode-select --install`; Windows: *Build Tools for Visual Studio* with "Desktop development
+with C++"; Linux: `gcc`), then:
 
 ```bash
 cargo build --release -p hgf-gui
-./target/release/happygreasefloppy
+./target/release/happygreasefloppy          # target\release\happygreasefloppy.exe on Windows
 ```
+
+* macOS application: `bash packaging/package.sh macos` → `dist/…-macos.zip` with
+  `HappyGreaseFloppy.app`.
+* Linux menu entry and icons: `packaging/linux/install.sh`.
 
 Packaging, tests against reference tools, the icon and the release workflow are described in
 [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md). The version history is in

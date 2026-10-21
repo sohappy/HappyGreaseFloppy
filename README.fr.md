@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  Une interface graphique conviviale pour les outils disquette <a href="https://github.com/keirf/greaseweazle">Greaseweazle</a>.<br>
+  Une interface graphique conviviale pour les outils <a href="https://github.com/keirf/greaseweazle">Greaseweazle</a> de lecture et d'écriture de disquettes.<br>
   Lire, écrire, copier, formater et diagnostiquer des disquettes — Amiga, PC, Atari ST, Commodore, Apple II, BBC Micro et bien d'autres.<br>
   Windows · macOS · Linux — <b>v0.17.1</b>
 </p>
@@ -28,12 +28,12 @@ pages et de boutons sont donnés ici tels qu'ils apparaissent à l'écran.
 
 ## Points forts
 
-* **Voir la disquette** : les deux faces dessinées comme elles tournent, chaque piste colorée au
+* **Voir la disquette** : les deux faces dessinées en anneaux de pistes, chaque piste colorée au
   fil de la lecture ou de l'écriture (bonne, récupérée après plusieurs essais, illisible), le
   détail des secteurs au survol, la progression avec le temps restant.
 * **Comprendre les échecs** : « No Index », « Track 0 not found », « Failed to verify », disquette
-  protégée, débordement USB… chacun est accompagné de ce qu'il faut vérifier et d'un bouton vers
-  le bon outil.
+  protégée, débordement USB… chacun est accompagné de ce qu'il faut vérifier et, quand c'est
+  utile, d'un bouton vers le bon outil.
 * **Récupérer les disquettes usées** : profil *Recovery*, puis *Re-read the failed tracks*, qui
   ne relit que les pistes en échec.
 * **Copier des disquettes** avec un seul lecteur (on vous demande d'échanger les disquettes) ou
@@ -41,11 +41,12 @@ pages et de boutons sont donnés ici tels qu'ils apparaissent à l'écran.
 * **Formater** des disquettes vierges pour Amiga, PC, Atari ST, MSX, Commodore 1541/1571/1581,
   BBC Micro et Apple II.
 * **Contrôler un lecteur** en une fois : vitesse du moteur, liaison USB, lecture d'une disquette
-  de référence, décalage des têtes, test d'écriture facultatif, avec un verdict.
+  de référence (avec un test de décalage des têtes si elle échoue), test d'écriture facultatif,
+  et un verdict.
 * **Archiver une boîte de disquettes** : numérotation automatique (`disk_001.adf`,
   `disk_002.adf`…), réglages enregistrés par machine, journal de toutes les commandes.
 * Thème sombre, clair ou celui du système ; taille du texte réglable ; la commande `gw` exacte
-  affichée avant d'être lancée.
+  affichée avant d'être lancée (Read, Write, Convert, Erase).
 
 ## Captures d'écran
 
@@ -80,8 +81,15 @@ l'enregistre comme image) :
 
 ## Installation
 
-Téléchargez l'archive de votre système depuis la page **Releases** de ce dépôt, ou compilez le
-programme vous-même (voir [Compilation](#compilation)).
+Aucune version n'est publiée : le programme s'obtient de l'une de ces deux façons.
+
+* **Le compiler** sur votre ordinateur (quelques minutes, voir [Compilation](#compilation)).
+* **Le faire compiler par GitHub** : dans ce dépôt, *Actions* → *Release* → **Run workflow**.
+  Une fois l'exécution terminée (environ 15 minutes), sa page propose les trois archives
+  ci-dessous dans *Artifacts* (il faut être connecté à GitHub pour les télécharger). Rien n'est
+  publié.
+
+Les archives contiennent :
 
 | Système | Archive | Démarrage |
 |---|---|---|
@@ -99,7 +107,8 @@ relance la recherche ; la variable d'environnement `HGF_GW` impose un chemin.
 
 1. **Branchez** le Greaseweazle en USB, et le lecteur avec sa nappe et son alimentation.
 2. **Choisissez le lecteur** dans la barre du haut :
-   * lecteur PC sur nappe croisée : **Drive A** (connecteur après le croisement) ou **B** ;
+   * lecteur PC sur nappe croisée : **Drive A** sur le connecteur du bout (après le croisement),
+     **Drive B** sur celui du milieu ;
    * lecteur PC sur nappe droite : **Drive B** ;
    * lecteur Amiga, Atari ou autre lecteur ancien (nappe droite) : **Unit 0** ou **Unit 1**.
 3. **Vérifiez l'installation** avec *Drive health* et une disquette que vous savez bonne.
@@ -109,7 +118,8 @@ relance la recherche ; la variable d'environnement `HGF_GW` impose un chemin.
 5. **Écrire une disquette** : choisissez l'image, vérifiez le format (détecté d'après l'image),
    puis *Write image to disk*. Chaque piste est vérifiée.
 
-Sans matériel, `HGF_GW=tools/fake-gw.py` fait tourner l'application avec un simulateur.
+Sans matériel, lancez-la avec `HGF_GW=tools/fake-gw.py` (Linux, macOS ; Python 3 nécessaire)
+pour l'essayer avec un simulateur.
 
 ## Les pages
 
@@ -124,14 +134,15 @@ Sans matériel, `HGF_GW=tools/fake-gw.py` fait tourner l'application avec un sim
 | Drive health | `info` `rpm` `bandwidth` `read` `write` | contrôle guidé avec verdict et rapport copiable |
 | Drive RPM · Head alignment | `rpm` · `align` | mesures et graphiques en direct |
 | Seek head · Clean drive | `seek` · `clean` | confirmation pour les cylindres extrêmes, progression du nettoyage |
-| Device info · Delays · Pins · USB bandwidth | `info` `delays` `pin` `bandwidth` | informations et réglages du Greaseweazle |
-| Reset · Firmware update | `reset` `update` | fichier local, version GitHub, bootloader |
+| Device info · Drive delays · Interface pins · USB bandwidth | `info` `delays` `pin` `bandwidth` | informations et réglages du Greaseweazle |
+| Reset device · Firmware update | `reset` `update` | fichier local, version GitHub, bootloader |
 | Image inspector | — | taille, SHA-256, format deviné, explorateur AmigaDOS |
 
-Partout : réglages enregistrés (modèles) pour la lecture et l'écriture, la ligne de commande
-`gw` avec un bouton de copie, un bouton *Stop* (ou `Échap`), une console avec un filtre
-*problems only*, le glisser-déposer des fichiers image, un journal facultatif, et une
-notification dans la barre des tâches ou le Dock quand une longue opération se termine.
+Et aussi : réglages enregistrés (modèles) sur Read et Write, la ligne de commande `gw` avec un
+bouton de copie sous les boutons d'action, un bouton *Stop* (ou `Échap`) pour toute opération en
+cours, une console avec un filtre *problems only*, le glisser-déposer des fichiers image, un
+journal facultatif, et une notification dans la barre des tâches ou le Dock quand une longue
+opération se termine en arrière-plan.
 
 ## Dépannage
 
@@ -144,20 +155,26 @@ notification dans la barre des tâches ou le Dock quand une longue opération se
 | `Permission denied` (Linux) | Ajoutez-vous au groupe `dialout`, puis déconnectez-vous et reconnectez-vous. |
 | macOS refuse d'ouvrir l'application | Clic droit → **Ouvrir** la première fois (l'application n'est pas notariée). |
 
-Le [wiki Greaseweazle](https://github.com/keirf/greaseweazle/wiki) (en anglais) couvre la partie
-matérielle :
+Le [wiki Greaseweazle](https://github.com/keirf/greaseweazle/wiki) (en anglais) traite de la
+partie matérielle :
 [premiers pas](https://github.com/keirf/greaseweazle/wiki/Getting-Started),
 [dépannage](https://github.com/keirf/greaseweazle/wiki/Troubleshooting-FAQ),
 [sélection du lecteur](https://github.com/keirf/greaseweazle/wiki/Drive-Select).
 
 ## Compilation
 
-Il faut Rust 1.95 ou plus récent et un compilateur C :
+Installez [Rust](https://rustup.rs) 1.95 ou plus récent et un compilateur C (macOS :
+`xcode-select --install` ; Windows : *Build Tools for Visual Studio* avec « Développement
+Desktop en C++ » ; Linux : `gcc`), puis :
 
 ```bash
 cargo build --release -p hgf-gui
-./target/release/happygreasefloppy
+./target/release/happygreasefloppy          # target\release\happygreasefloppy.exe sous Windows
 ```
+
+* Application macOS : `bash packaging/package.sh macos` → `dist/…-macos.zip` contenant
+  `HappyGreaseFloppy.app`.
+* Entrée de menu et icônes sous Linux : `packaging/linux/install.sh`.
 
 La création des paquets, les tests avec les outils de référence, l'icône et la publication sont
 décrits dans [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) (en anglais). L'historique des versions
