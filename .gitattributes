@@ -1,2 +1,21 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Keep LF endings on every system: shell scripts must not get CRLF on Windows checkouts
+# (bash would fail with "$'\r': command not found").
+* text=auto eol=lf
+*.bat text eol=crlf
+
+# Binary assets, never converted.
+*.ttf binary
+*.ico binary
+*.icns binary
+*.png binary
+*.rgba binary
+*.adf binary
+*.scp binary
+*.jpg binary
+*.gif binary
+*.d64 binary
+*.d71 binary
+*.d81 binary
+*.img binary
+*.st binary
+*.hfe binary

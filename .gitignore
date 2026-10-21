@@ -1,0 +1,15 @@
+# Build output
+target/
+dist/
+
+# Settings saved by the app when run from the source tree
+*.ron
+
+# System and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*~

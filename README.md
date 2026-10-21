@@ -5,6 +5,10 @@
 <h1 align="center">HappyGreaseFloppy</h1>
 
 <p align="center">
+  <b>English</b> · <a href="README.fr.md">Français</a>
+</p>
+
+<p align="center">
   A friendly desktop front-end for the <a href="https://github.com/keirf/greaseweazle">Greaseweazle</a> floppy disk tools.<br>
   Read, write, copy, format and diagnose floppy disks — Amiga, PC, Atari ST, Commodore, Apple II, BBC Micro and more.<br>
   Windows · macOS · Linux — <b>v0.17.1</b>

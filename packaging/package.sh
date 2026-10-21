@@ -21,7 +21,7 @@ case "$name" in
     cp target/release/happygreasefloppy "$dir/happygreasefloppy"
     cp -r packaging/icons "$dir/icons"
     cp packaging/icon.svg "$dir/icons/happygreasefloppy.svg"
-    cp packaging/linux/happygreasefloppy.desktop packaging/linux/install.sh README.md "$dir/"
+    cp packaging/linux/happygreasefloppy.desktop packaging/linux/install.sh README.md README.fr.md "$dir/"
     chmod +x "$dir/happygreasefloppy" "$dir/install.sh"
     add_licences "$dir"
     tar czf "dist/$dir.tar.gz" "$dir"
@@ -29,7 +29,7 @@ case "$name" in
   windows-*)
     mkdir -p "$dir"
     cp target/release/happygreasefloppy.exe "$dir/$app.exe"
-    cp README.md "$dir/"
+    cp README.md README.fr.md "$dir/"
     add_licences "$dir"
     cat > "$dir/GREASEWEAZLE.txt" <<'TXT'
 HappyGreaseFloppy needs the Greaseweazle host tools (gw.exe).
@@ -53,7 +53,7 @@ TXT
     cp "$bin" "$bundle/Contents/MacOS/$app"
     sed "s/@VERSION@/${version#v}/g" packaging/macos/Info.plist > "$bundle/Contents/Info.plist"
     cp packaging/icon.icns "$bundle/Contents/Resources/AppIcon.icns"
-    cp README.md "$dir/"
+    cp README.md README.fr.md "$dir/"
     add_licences "$dir"
     ditto -c -k --keepParent "$dir" "dist/$dir.zip"
     ;;
